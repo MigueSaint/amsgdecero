@@ -54,7 +54,7 @@ jobs:
           whoami
           uptime
 
-    - name:  Deploy con eliminacion del stack
+    - name:  Pasar con copia del stack al servidor
       uses: appleboy/scp-action@v1
       with:
         host: ${{ secrets.VPS_HOST }}
@@ -64,6 +64,23 @@ jobs:
         source: "stack.yml"
         target: "/home/${{ secrets.VPS_USER}}/despliegue"
 
-        
+    - name:  Deploy de los servicios
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_SSH_PORT }}
+        script:
+          echo "Despliegu de servicios"
+          
+          docker stack rm cristhian || true
+
+          docker pull ghcr.io/miguesaint/amsgdecero:1.0.0
+
+          docker stack deploy -c stack.yml --with-registry-auth cristhian
+
+
+
 
       
