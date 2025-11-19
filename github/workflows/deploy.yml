@@ -20,7 +20,7 @@ jobs:
         python-version: "3.11"
 
     - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v23
+      uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
@@ -32,3 +32,26 @@ jobs:
         context: .
         push: true
         tags: ghcr.miguesaint/amsgdecero:1.0.0
+
+    - name: Mostrar variables basicas
+    - run:
+        echo "Probando conexion SSH con:"
+        echo "Host: ${{ secrets.VPS_HOST }}"
+        echo "Usuario: ${{ secrets.VPS_USER }}"
+        echo "Puerto: ${{ secrets.VPS_SSH_PORT }}"
+        echo "Password: ${{ secrets.VPS_PASSWORD }}"
+
+    - name:  Deploy con eliminacion del stack
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_SSH_PORT }}
+        script:
+          echo "Conexion con ¡ÉXITO! desde Github Actions"
+          hostname
+          whoami
+          uptime
+          
+      
