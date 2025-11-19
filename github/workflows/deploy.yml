@@ -2,7 +2,7 @@ name: Deploy AMSG Desde Cero
 
 on:
   push:
-    branches: "quintoa"
+    branches: "amsg"
 
 permissions:
   contents: read
@@ -53,5 +53,5 @@ jobs:
           hostname
           whoami
           uptime
-          
+
       
