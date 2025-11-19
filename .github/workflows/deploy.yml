@@ -76,7 +76,7 @@ jobs:
           
           docker stack rm cristhian || true
 
-          docker pull ghcr.io/miguesaint/amsgdecero:1.0.0
+          echo "docker pull ghcr.io/miguesaint/amsgdecero:1.0.0"
 
           docker stack deploy -c stack.yml --with-registry-auth cristhian
 
