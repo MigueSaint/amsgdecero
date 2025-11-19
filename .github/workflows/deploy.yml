@@ -34,7 +34,7 @@ jobs:
         tags: ghcr.miguesaint/amsgdecero:1.0.0
 
     - name: Mostrar variables basicas
-    - run:
+      run: |
         echo "Probando conexion SSH con:"
         echo "Host: ${{ secrets.VPS_HOST }}"
         echo "Usuario: ${{ secrets.VPS_USER }}"
