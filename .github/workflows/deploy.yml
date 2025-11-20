@@ -92,7 +92,7 @@ jobs:
 
           # paso 3 Desplegar los servicios
 
-          echo ""==> Desplegando Stack..."
+          echo "==> Desplegando Stack..."
 
           docker stack deploy -c stack.yml --with-registry-auth cristhian
 
