@@ -2,7 +2,8 @@ name: Deploy AMSG Desde Cero
 
 on:
   push:
-    branches: "amsg"
+    branches: 
+      - amsg
 
 permissions:
   contents: read
@@ -71,15 +72,16 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
         port: ${{ secrets.VPS_SSH_PORT }}
-        script:
+        script: |
           echo "Despliegu de servicios"
           
-          docker stack rm cristhian || true
+          #docker stack rm cristhian || true
 
-          echo "docker pull ghcr.io/miguesaint/amsgdecero:1.0.0"
+          docker pull ghcr.io/miguesaint/amsgdecero:1.0.0
 
-          docker stack deploy -c stack.yml --with-registry-auth cristhian
+          #docker stack deploy -c stack.yml --with-registry-auth cristhian
 
+          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u paul1578 --password-stdin
 
 
 
